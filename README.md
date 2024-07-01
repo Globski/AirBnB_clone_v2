@@ -352,6 +352,7 @@ export HBNB_TYPE_STORAGE=db
 
 ## Authors 
 - [Gloria Ogunsemore](https://github.com/globski)
+- [Maxwell Duedu)](BaduDueduMaxwell)
 - Ezra Nobrega
 - Justin Majetich
 
