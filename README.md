@@ -32,7 +32,6 @@ The objective is to improve upon the initial version by implementing additional 
 - Implement file storage (FileStorage).
 - Implement database storage (DBStorage) using SQLAlchemy.
 - Write unit tests for all modules, classes, and functions.
-- Ensure edge cases are tested.
 - Map Python classes to MySQL tables using SQLAlchemy.
 - Handle relationships between tables.
 - Integrate storage engines with the main application.
