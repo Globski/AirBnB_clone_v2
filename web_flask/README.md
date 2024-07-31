@@ -73,6 +73,11 @@ Activate the virtual environment:
     source venv/bin/activate
     ```
 
+**Install Flask**
+```
+$ pip3 install Flask
+```
+
 **Install Dependencies**
 
 Install the required Python packages using `pip`:
