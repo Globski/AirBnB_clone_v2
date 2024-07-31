@@ -48,6 +48,26 @@ Create a web framework using Flask which includes setting up routes, templates, 
 - How to create a dynamic template (loops, conditions…)
 - How to display in HTML data from a MySQL database
 
+## Environment
+- Ubuntu 20.04 LTS
+- python3 (version 3.4.3)
+- PEP 8 style (version 1.7)
+
+## Requirements
+
+**Python Scripts**
+- All your files should end with a new line
+- The first line of all your files should be exactly #!/usr/bin/python3
+- All your files must be executable
+
+**HTML/CSS Files**
+- All your files should end with a new line
+- Your code should be W3C compliant and validate with W3C-Validator (except for jinja template)
+- All your CSS files should be in the styles folder
+- All your images should be in the images folder
+- You are not allowed to use !important or id (#... in the CSS file)
+- All tags must be in uppercase
+
 ## How to Use
 To set up and run Flask application, follow these instructions:
 
@@ -72,6 +92,11 @@ Activate the virtual environment:
     ```bash
     source venv/bin/activate
     ```
+
+**Install Flask**
+```
+$ pip3 install Flask
+```
 
 **Install Dependencies**
 
