@@ -138,6 +138,85 @@ Launch the console by running the command above. When this command is run the fo
 ```
 (hbnb)
 ```
+___
+To set up and run Flask application, follow these instructions:
+
+**Create a Virtual Environment**
+
+It’s best to use a virtual environment to manage your project’s dependencies:
+
+```bash
+python -m venv venv
+```
+
+Activate the virtual environment:
+
+- **Windows:**
+
+    ```bash
+    venv\Scripts\activate
+    ```
+
+- **macOS/Linux:**
+
+    ```bash
+    source venv/bin/activate
+    ```
+
+**Install Dependencies**
+
+Install the required Python packages using `pip`:
+
+```bash
+pip install -r requirements.txt
+```
+
+**Set Up the Database**
+
+Initialize your database. This typically involves running the Flask commands to create tables and apply migrations:
+
+```bash
+flask db init       # Initialize the database
+flask db migrate    # Create migration scripts
+flask db upgrade    # Apply migrations
+```
+**Configure Environment Variables**
+
+Create a `.env` file in the root directory of your project and add the necessary environment variables. Here’s an example `.env` file:
+
+```
+FLASK_APP=main.py
+FLASK_ENV=development
+SECRET_KEY=your_secret_key_here
+DATABASE_URL=sqlite:///your_database.db
+```
+**Run the Flask Application**
+
+Start the Flask development server:
+
+```bash
+flask run
+```
+
+By default, the server will be available at `http://127.0.0.1:5000`.
+
+**Access the Application**
+
+Open your web browser and navigate to `http://127.0.0.1:5000` to view the application.
+
+- **Registration:** Go to `/register` to create a new user account.
+- **Login:** Go to `/login` to log in with your credentials.
+- **Users List:** Go to `/users` to view a paginated list of users.
+- **Search:** Go to `/search` to search for users by name.
+
+**Stop the Application**
+
+To stop the Flask development server, simply press `Ctrl+C` in your terminal.
+
+
+### Additional Notes
+
+- **Debug Mode:** When running in development mode (`FLASK_ENV=development`), the server will automatically reload on code changes.
 
 ### Examples of Basic Actions Using the Console
 
