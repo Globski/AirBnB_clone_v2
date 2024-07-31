@@ -9,7 +9,7 @@ This repository contains the second version of the AirBnB clone project. This ve
 
 ## Objective
 
-The objective is to improve upon the initial version by implementing additional features and functionality.
+The objective is to improve upon the initial version by implementing additional features and functionality. This involves creating a web framework using Flask which includes setting up routes, templates, static files, and integrating with SQLAlchemy for database management.
 
 ## Project Structure
 
@@ -26,6 +26,22 @@ The objective is to improve upon the initial version by implementing additional 
 | 9. Update Place | Add a relationship between `Place` and `Review` models | [models/place.py](models/place.py) |
 | 10. DBStorage - Place Amenities | Implement a many-to-many relationship between `Place` and `Amenity` | [models/place.py](models/place.py), [models/amenity.py](models/amenity.py) |
 
+| Task | Description | Source Code |
+|-----------------------------------|------------------------------------------------------|-----------------------------------------------|
+| 0. Basic Flask Application | Create a basic Flask application that listens on `0.0.0.0`, port `5000`. Define a route `/` that returns “Hello HBNB!”. Create a template directory with a basic HTML file that displays “Hello HBNB!”. Use the `render_template` function to render the HTML file. | [Source Code](#) |
+| 1. Dynamic Routes | Define a route `/hbnb` that returns “HBNB” and a route `/c/<text>` that returns “C ” followed by the value of `<text>` (replace `_` with space). | [Source Code](#) |
+| 2. Error Handling | Define a route `/number/<int:n>` that returns “n is a number” if `<n>` is an integer, otherwise it should return “Not a number”. | [Source Code](#) |
+| 3. Templates | Create a template to display “Hello HBNB!” when visiting the root route. Use Jinja2 templates to render dynamic content. Define a template that displays “C ” followed by the value of `<text>` for the route `/c/<text>`. | [Source Code](#) |
+| 4. Static Files | Create a directory for static files (CSS, JS, etc.). Define a route `/static/<path:filename>` that serves static files from the static directory. | [Source Code](#) |
+| 5. Web Framework Integration | Implement the integration of Flask with SQLAlchemy. Create models for your data (e.g., `User`, `State`, `City`, `Amenity`, etc.). Implement CRUD operations using SQLAlchemy. | [Source Code](#) |
+| 6. API Documentation | Document your API endpoints with appropriate documentation. Ensure that all routes have clear descriptions and usage examples. | [Source Code](#) |
+| 7. Testing | Write test cases for your application to ensure it works as expected. Use a testing framework (e.g., `unittest`, `pytest`) to automate testing. | [Source Code](#) |
+| 8. Deployment | Prepare your application for deployment on a production server. Configure your application to use a production-ready server (e.g., Gunicorn) and set up environment variables for production. | [Source Code](#) |
+| 9. Continuous Integration | Set up CI/CD pipelines to automate testing and deployment processes. Ensure that your application is tested and deployed automatically on each commit. | [Source Code](#) |
+| 10. Database Setup | Set up a database for your application. Configure your application to connect to the database and perform operations. | [Source Code](#) |
+| 11. User Authentication | Implement user authentication and authorization. Create login and registration routes and manage user sessions. | [Source Code](#) |
+| 12. Advanced Features | Implement advanced features such as pagination, search functionality, or file uploads. Enhance your application with additional features that improve user experience. | [Source Code](#) |
+
 ## Features
 - Configure environment variables.
 - Set up MySQL database and user.
@@ -37,20 +53,47 @@ The objective is to improve upon the initial version by implementing additional 
 - Integrate storage engines with the main application.
 - Test the application in different environments (dev and test).
 - Write SQL scripts for various database operations.
+___
+- Develop a web application using Flask, Set up routing, handling variables in routes, and rendering templates.
+- Create and use templates with Jinja2 for rendering HTML with dynamic content.
+- Define routes in Flask to handle incoming requests and direct them to appropriate view functions.
+- Implement various HTTP methods (GET, POST, etc.) to interact with users and manage data.
+- Use templates to generate dynamic HTML content based on data passed from Flask routes.
+- Connect Flask application to a MySQL database to manage and store data.
+- Implement SQLAlchemy to interact with the database, perform CRUD (Create, Read, Update, Delete) operations, and manage database models.
 
 ### Learning Objectives
 By the end of this project, you should be able to:
-1. Implement unit testing in a large project.
-2. Use *args and **kwargs effectively.
-3. Handle named arguments in a function.
-4. Create a MySQL database and user with privileges.
-5. Understand ORM and map Python classes to MySQL tables.
-6. Handle multiple storage engines with the same codebase.
-7. Use environment variables in Python.
+- Implement unit testing in a large project.
+- Use *args and **kwargs effectively.
+- Handle named arguments in a function.
+- Create a MySQL database and user with privileges.
+- Understand ORM and map Python classes to MySQL tables.
+- Handle multiple storage engines with the same codebase.
+- Use environment variables in Python.
+___
+- Understanding Flask and how to build web applications with it.
+- Learning how to integrate Flask with SQLAlchemy for database operations.
+- Implementing web frameworks and deploying applications.
+- Writing tests and setting up CI/CD pipelines.
+- What is a Web Framework
+- How to build a web framework with Flask
+- How to define routes in Flask
+- What is a route
+- How to handle variables in a route
+- What is a template
+- How to create a HTML response in Flask by using a template
+- How to create a dynamic template (loops, conditions…)
+- How to display in HTML data from a MySQL database
 
-### Requirements
+## Environment
+- **Interpreter/Compiler:** Ubuntu 20.04 LTS
+- **Python**: Version 3.8.5
+- **Flask**: Version 2.x
+- **SQLAlchemy**: Version 1.x 
+
+## Requirements
 #### Python Scripts
-- **Interpreter/Compiler:** Ubuntu 20.04 LTS, Python 3.8.5
 -  **File Structure:** files must end with a new line
 - **Code Style:** pycodestyle 2.8.*
 - **Testing:** unittest module, tests organized in `tests` folder, executable via `python3 -m unittest discover tests`
@@ -58,6 +101,10 @@ By the end of this project, you should be able to:
 #### SQL Scripts
 - **Execution:** Ubuntu 20.04 LTS, MySQL 8.0, SQLAlchemy 1.4.x
 - **File Structure:** files must end with a new line, SQL keywords in uppercase.
+___
+- `Flask`
+- `SQLAlchemy`
+- `pytest` (for testing)
 
 ## Command Interpreter
 The console is a command-line interface (CLI) tool that allows users to interact with the backend of the AirBnB Clone project. It provides an interface to create, retrieve, update, and delete various objects in the system, including users, places, cities, states, amenities, and reviews. This is essential for developers to test and manage the application's data.
