@@ -97,14 +97,11 @@ ___
 -  **File Structure:** files must end with a new line
 - **Code Style:** pycodestyle 2.8.*
 - **Testing:** unittest module, tests organized in `tests` folder, executable via `python3 -m unittest discover tests`
+- `pytest` (for testing)
 
 #### SQL Scripts
 - **Execution:** Ubuntu 20.04 LTS, MySQL 8.0, SQLAlchemy 1.4.x
 - **File Structure:** files must end with a new line, SQL keywords in uppercase.
-___
-- `Flask`
-- `SQLAlchemy`
-- `pytest` (for testing)
 
 ## Command Interpreter
 The console is a command-line interface (CLI) tool that allows users to interact with the backend of the AirBnB Clone project. It provides an interface to create, retrieve, update, and delete various objects in the system, including users, places, cities, states, amenities, and reviews. This is essential for developers to test and manage the application's data.
