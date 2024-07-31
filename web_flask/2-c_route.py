@@ -8,7 +8,6 @@ Routes:
     /c/<text>: Displays 'C <text>'
 """
 from flask import Flask
-
 app = Flask(__name__)
 
 

@@ -7,7 +7,6 @@ Routes:
     /hbnb: Displays 'HBNB'
 """
 from flask import Flask
-
 app = Flask(__name__)
 
 
