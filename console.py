@@ -263,7 +263,7 @@ class HBNBCommand(cmd.Cmd):
         new_dict = storage.all()[key]
         for i, att_name in enumerate(args):
             if (i % 2 == 0):
-                att_val = args[i + 1] 
+                att_val = args[i + 1]
                 if not att_name:
                     print("** attribute name missing **")
                     return
@@ -274,8 +274,7 @@ class HBNBCommand(cmd.Cmd):
                     att_val = HBNBCommand.types[att_name](att_val)
 
                 new_dict.__dict__.update({att_name: att_val})
-
-        new_dict.save() 
+        new_dict.save()
 
     def help_update(self):
         """ Help information for the update class """
