@@ -57,16 +57,6 @@ By the end of this project, you should be able to:
 
 ## Requirements
 #### Python Scripts
--  **File Structure:** files must end with a new line
-- **Code Style:** pycodestyle 2.8.*
-- **Testing:** unittest module, tests organized in `tests` folder, executable via `python3 -m unittest discover tests`
-- `pytest` (for testing)
-
-#### SQL Scripts
-- **Execution:** Ubuntu 20.04 LTS, MySQL 8.0, SQLAlchemy 1.4.x
-- **File Structure:** files must end with a new line, SQL keywords in uppercase.
-
-#### Python Scripts
 - All your files will be interpreted/compiled on Ubuntu 20.04 LTS using python3 (version 3.8.5)
 - All your files should end with a new line
 - The first line of all your files should be exactly #!/usr/bin/python3
