@@ -664,3 +664,89 @@ File to modify: **models/user.py**
 ### Repo:
 GitHub repository: **AirBnB_clone_v2**  
 Files to modify: **models/place.py**, **models/user.py**, **models/city.py**
+
+---
+
+# Task 9: DBStorage - Review
+
+### Update **Review** (`models/review.py`):
+
+- **Review** should inherit from both `BaseModel` and `Base` (in this order).
+
+- Add or replace the following class attributes in **Review**:
+  - `__tablename__`: Represents the table name (`reviews`).
+  - `text`: Represents a column containing a string (1024 characters), can’t be `null`.
+  - `place_id`: Represents a column containing a string (60 characters), can’t be `null`, and is a foreign key to `places.id`.
+  - `user_id`: Represents a column containing a string (60 characters), can’t be `null`, and is a foreign key to `users.id`.
+
+### Update **User** (`models/user.py`):
+
+- Add or replace in the class **User**:
+  - `reviews`: Represents a relationship with the **Review** class. If a **User** object is deleted, all linked **Review** objects should be automatically deleted. The reference from a **Review** object to its **User** should be named `user`.
+
+### Update **Place** (`models/place.py`):
+
+- **For DBStorage**: Add the `reviews` attribute to represent a relationship with the **Review** class. If a **Place** object is deleted, all linked **Review** objects should be automatically deleted. The reference from a **Review** object to its **Place** should be named `place`.
+
+- **For FileStorage**: Implement a getter attribute `reviews` that returns a list of **Review** instances where `place_id` equals the current `Place.id`. This will represent the FileStorage relationship between **Place** and **Review**.
+
+### Example of Creating a User and a Review:
+
+1. **Create a User**:
+   ```bash
+   echo 'create User email="bob@hbtn.io" password="bobpwd" first_name="Bob" last_name="Dylan"' | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+   ```
+
+2. **Create a Review**:
+   ```bash
+   echo 'create Review place_id="ed72aa02-3286-4891-acbc-9d9fc80a1103" user_id="d93638d9-8233-4124-8f4e-17786592908b" text="Amazing_place,_huge_kitchen"' | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+   ```
+
+3. **View the created Review**:
+   ```bash
+   echo 'all Review' | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+   ```
+
+4. **View the created Review in MySQL**:
+   ```bash
+   echo 'SELECT * FROM reviews\G' | mysql -uhbnb_dev -p hbnb_dev_db
+   ```
+
+### Example Output:
+
+- **User Creation**:
+  ```bash
+  (hbnb) d93638d9-8233-4124-8f4e-17786592908b
+  ```
+
+- **Review Creation**:
+  ```bash
+  (hbnb) a2d163d3-1982-48ab-a06b-9dc71e68a791
+  ```
+
+- **All Reviews**:
+  ```bash
+  (hbnb) [[Review] (f2616ff2-f723-4d67-85dc-f050a38e0f2f) {
+    'text': 'Amazing place, huge kitchen',
+    'place_id': 'ed72aa02-3286-4891-acbc-9d9fc80a1103',
+    'id': 'f2616ff2-f723-4d67-85dc-f050a38e0f2f',
+    'updated_at': datetime.datetime(2017, 11, 10, 4, 6, 25),
+    'created_at': datetime.datetime(2017, 11, 10, 4, 6, 25),
+    'user_id': 'd93638d9-8233-4124-8f4e-17786592908b'
+  }]
+  ```
+
+- **MySQL Output**:
+  ```bash
+  *************************** 1. row ***************************
+      id: f2616ff2-f723-4d67-85dc-f050a38e0f2f
+      created_at: 2017-11-10 04:06:25
+      updated_at: 2017-11-10 04:06:25
+      text: Amazing place, huge kitchen
+      place_id: ed72aa02-3286-4891-acbc-9d9fc80a1103
+      user_id: d93638d9-8233-4124-8f4e-17786592908b
+  ```
+
+### Repo:
+GitHub repository: **AirBnB_clone_v2**  
+Files to modify: **models/review.py**, **models/user.py**, **models/place.py**
