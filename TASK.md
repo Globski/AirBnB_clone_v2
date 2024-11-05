@@ -750,3 +750,154 @@ Files to modify: **models/place.py**, **models/user.py**, **models/city.py**
 ### Repo:
 GitHub repository: **AirBnB_clone_v2**  
 Files to modify: **models/review.py**, **models/user.py**, **models/place.py**
+
+---
+
+# Task 10: DBStorage - Amenity... and BOOM!
+
+### Update **Amenity** (`models/amenity.py`):
+
+- **Amenity** should inherit from both `BaseModel` and `Base` (respecting the order).
+
+- Add or replace the following class attributes in **Amenity**:
+  - `__tablename__`: Represents the table name (`amenities`).
+  - `name`: Represents a column containing a string (128 characters), and it can't be `null`.
+  - `place_amenities`: Represents a **Many-To-Many** relationship between **Place** and **Amenity**. More details in the **Place** update below.
+
+### Update **Place** (`models/place.py`):
+
+- Add an instance of SQLAlchemy `Table` called `place_amenity` to create the **Many-To-Many** relationship between **Place** and **Amenity**. This table will serve as a junction table for the relationship.
+
+  - **Table name**: `place_amenity`
+  - **Columns**:
+    - `place_id`: A string of 60 characters, foreign key to `places.id`, primary key, and not `null`.
+    - `amenity_id`: A string of 60 characters, foreign key to `amenities.id`, primary key, and not `null`.
+  - The table will link places and amenities in a **Many-To-Many** relationship.
+
+- Update the **Place** class:
+  - **For DBStorage**: Add an `amenities` attribute that represents the relationship with the **Amenity** class via the `place_amenity` table. Use the `secondary` argument to link the two and set `viewonly=False` to allow changes.
+  
+  - **For FileStorage**: Implement the following attributes:
+    - **Getter**: `amenities` — returns a list of **Amenity** instances based on the `amenity_ids` attribute, which contains all the `Amenity.id` linked to the **Place**.
+    - **Setter**: `amenities` — appends an **Amenity.id** to the `amenity_ids` attribute. The setter should accept only **Amenity** objects, otherwise, it should do nothing.
+
+### What is a Many-to-Many Relationship?
+
+A **Many-to-Many** relationship is one where:
+- An **Amenity** can be linked to multiple **Places**.
+- A **Place** can have multiple **Amenities**.
+
+In this system, we avoid duplicating amenities (e.g., having multiple instances of "Wifi") by making amenities unique. However, multiple places can have the same amenity.
+
+To represent this relationship, we will create a third table, `place_amenity`, which will create links between places and amenities.
+
+### Example Test Script: `main_place_amenities.py`
+
+The following Python script demonstrates creating and linking places and amenities:
+
+```python
+guillaume@ubuntu:~/AirBnB_v2$ cat main_place_amenities.py 
+#!/usr/bin/python3
+""" Test link Many-To-Many Place <> Amenity
+"""
+from models import *
+
+# creation of a State
+state = State(name="California")
+state.save()
+
+# creation of a City
+city = City(state_id=state.id, name="San Francisco")
+city.save()
+
+# creation of a User
+user = User(email="john@snow.com", password="johnpwd")
+user.save()
+
+# creation of 2 Places
+place_1 = Place(user_id=user.id, city_id=city.id, name="House 1")
+place_1.save()
+place_2 = Place(user_id=user.id, city_id=city.id, name="House 2")
+place_2.save()
+
+# creation of 3 various Amenity
+amenity_1 = Amenity(name="Wifi")
+amenity_1.save()
+amenity_2 = Amenity(name="Cable")
+amenity_2.save()
+amenity_3 = Amenity(name="Oven")
+amenity_3.save()
+
+# link place_1 with 2 amenities
+place_1.amenities.append(amenity_1)
+place_1.amenities.append(amenity_2)
+
+# link place_2 with 3 amenities
+place_2.amenities.append(amenity_1)
+place_2.amenities.append(amenity_2)
+place_2.amenities.append(amenity_3)
+
+storage.save()
+
+print("OK")
+```
+
+### Testing the Database
+
+1. **Run the script** to test the creation and linking of places and amenities:
+   ```bash
+   HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./main_place_amenities.py
+   ```
+
+2. **Verify the Amenity Table**:
+   ```bash
+   echo 'SELECT * FROM amenities\G' | mysql -uhbnb_dev -p hbnb_dev_db
+   ```
+
+   Example output:
+   ```bash
+   *************************** 1. row ***************************
+     id: 47321eb8-152a-46df-969a-440aa67a6d59
+     created_at: 2017-11-10 04:22:02
+     updated_at: 2017-11-10 04:22:02
+     name: Cable
+   ```
+
+3. **Verify the Places Table**:
+   ```bash
+   echo 'SELECT * FROM places\G' | mysql -uhbnb_dev -p hbnb_dev_db
+   ```
+
+   Example output:
+   ```bash
+   *************************** 1. row ***************************
+     id: 497e3867-d6e9-4401-9c7c-9687c18d2ac7
+     created_at: 2017-11-10 04:22:02
+     updated_at: 2017-11-10 04:22:02
+     city_id: 9d60df6e-31f7-430c-8162-69e89f4a17aa
+     user_id: 9b37bd51-6aef-485f-bf10-c7ab83fea2e9
+     name: House 1
+     description: NULL
+     number_rooms: 0
+     number_bathrooms: 0
+     max_guest: 0
+     price_by_night: 0
+     latitude: NULL
+     longitude: NULL
+   ```
+
+4. **Verify the `place_amenity` Table**:
+   ```bash
+   echo 'SELECT * FROM place_amenity\G' | mysql -uhbnb_dev -p hbnb_dev_db
+   ```
+
+   Example output:
+   ```bash
+   *************************** 1. row ***************************
+     place_id: 497e3867-d6e9-4401-9c7c-9687c18d2ac7
+     amenity_id: 47321eb8-152a-46df-969a-440aa67a6d59
+   ```
+
+### Repo:
+GitHub repository: **AirBnB_clone_v2**  
+Files to modify: **models/amenity.py**, **models/place.py**
